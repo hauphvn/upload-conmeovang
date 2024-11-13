@@ -29,6 +29,11 @@ const nextConfig: NextConfig = {
             },
         ];
     },
+    env: {
+        AUTH_GOOGLE_ID: '52262019425-36s08fm4heutfh9h2ofr7tvpchrqv46r.apps.googleusercontent.com',
+        AUTH_GOOGLE_SECRET: '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',
+        NEXTAUTH_SECRET: 'mQ46qpFwfE1BHuqMC+qlm19qBAD9fVPgh28werwe3ASFlAfnKjM=',
+    },
 
     // Other configuration options can go here
     // For example, you can set the base path, asset prefix, etc.
