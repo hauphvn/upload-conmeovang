@@ -1,11 +1,10 @@
 import { google } from 'googleapis'
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: NextRequest) {
     if (req.method !== 'GET') {
-        res.setHeader('Allow', ['GET'])
-        res.status(405).end(`Method ${req.method} Not Allowed`)
-        return
+        return NextResponse.json({ error: `Method ${req.method} Not Allowed` }, { status: 405 })
     }
 
     // Load service account credentials
@@ -26,13 +25,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         })
 
         const folders = response.data.files
-        if (folders?.length) {
-            res.status(200).json(folders)
-        } else {
-            res.status(200).json([])
-        }
+        return NextResponse.json(folders || [])
     } catch (error) {
         console.error('Error listing folders:', error)
-        res.status(500).json({ error: 'Error listing folders' })
+        return NextResponse.json({ error: 'Error listing folders' }, { status: 500 })
     }
 }

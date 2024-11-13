@@ -1,7 +1,5 @@
-import GoogleProvider from "next-auth/providers/google"
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-import NextAuth, { NextAuthOptions } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import {NextAuthOptions} from "next-auth";
 
 export const authOptions: NextAuthOptions = {
     providers: [
@@ -10,7 +8,7 @@ export const authOptions: NextAuthOptions = {
             clientSecret: process.env.AUTH_GOOGLE_SECRET!,
             authorization: {
                 params: {
-                    scope: "https://www.googleapis.com/auth/drive.file email profile"
+                    scope: 'https://www.googleapis.com/auth/drive.file email profile'
                 }
             }
         })
@@ -31,13 +29,8 @@ export const authOptions: NextAuthOptions = {
             session: any,
             token: any
         }) {
-            session.accessToken = token.accessToken as string
+            session.accessToken = token.accessToken
             return session
         }
     }
 }
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-const handler = NextAuth(authOptions)
-export { handler as GET, handler as POST }

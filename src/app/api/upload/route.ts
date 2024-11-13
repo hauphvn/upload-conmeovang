@@ -1,12 +1,11 @@
 import {google} from 'googleapis'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
 import {getServerSession} from "next-auth"
 import {NextResponse} from 'next/server'
 import fs from 'fs'
 import path from 'path'
 import os from 'os'
-import {authOptions} from "@/app/api/auth/[...nextauth]";
+import {authOptions} from "@/app/utils/authOptions";
 
 export async function POST(request: Request) {
     const session = await getServerSession(authOptions)
